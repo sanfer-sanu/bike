@@ -1,29 +1,35 @@
 package com.globalmatics.bike.models;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Document(collection = "bikes")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Bike {
 
 	@Id
-	private String id;
+	private Long id;
 	private String name;
 	private String email;
 	private String phone;
 	private String model;
 	private BigDecimal purchasePrice;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy")
 	private Date purchaseDate;
 	private boolean contact;
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -85,7 +91,7 @@ public class Bike {
 	
 	@Override
 	public String toString() {
-		return "Bikes{" +
+		return "Bikes : {" +
 				"id='" + id + '\''+
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +

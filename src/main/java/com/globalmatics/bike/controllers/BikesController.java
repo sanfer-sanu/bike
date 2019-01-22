@@ -30,7 +30,7 @@ public class BikesController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.OK)
 	public void create(@RequestBody Bike bike) {
-		
+		bikeRepository.save(bike);
 	}
 	
 	@GetMapping("/{id}")
